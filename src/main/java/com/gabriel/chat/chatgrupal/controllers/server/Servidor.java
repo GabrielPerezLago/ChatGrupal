@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Servidor {
     public static final int PUERTO = 8080;
     public static final int MAX_CLIENTES = 8;
+    public String nombreCliente;
     public static final AtomicInteger contadorClientes = new AtomicInteger(0);
 
     public static Set<ManejadorCliente> clientes = ConcurrentHashMap.newKeySet();

@@ -1,0 +1,10 @@
+.titulo {
+    -fx-font-size: 10pt;
+    -fx-text-fill: red;
+}
+
+.button {
+    -fx-padding: 10pt;
+    -fx-start-margin: 10pt;
+
+}

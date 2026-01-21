@@ -9,6 +9,7 @@ import java.net.Socket;
 public class ManejadorCliente implements Runnable {
     private Socket socket;
     private int idCliente;
+    private String nombreCliente;
 
     private PrintWriter salida;
     private BufferedReader entrada;
@@ -23,9 +24,10 @@ public class ManejadorCliente implements Runnable {
         try {
             salida = new PrintWriter(socket.getOutputStream(), true);
             entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.nombreCliente = entrada.readLine();
 
-            salida.println("Bienvenido , eres el cliente -> id: " + idCliente);
-            manager("El cliente --> " + idCliente + " <-- se ha conectado");
+            salida.println("Bienvenido " + nombreCliente + " , eres el cliente -> id: " + idCliente);
+            manager("El cliente --> " + idCliente + "#" + nombreCliente + " <-- se ha conectado");
 
             String message;
             while ((message = entrada.readLine()) != null) {
@@ -33,7 +35,7 @@ public class ManejadorCliente implements Runnable {
                     break;
                 }
 
-                manager("Cliente #" + idCliente + ": " + message);
+                manager("Cliente #" + nombreCliente + ": " + message);
             }
 
 

@@ -1,5 +1,8 @@
 package com.gabriel.chat.chatgrupal.controllers.clients;
 
+import com.gabriel.chat.chatgrupal.models.ClienteModel;
+import com.gabriel.chat.chatgrupal.views.ClienteView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +13,15 @@ import java.util.Scanner;
 public class Cliente {
     private static final String HOST = "localhost";
     private static final int PORT = 8080;
+    private String nombre;
 
-    public static void main(String[] args) {
+    private ClienteView view = new ClienteView();
+
+    public Cliente(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void iniciar() {
         try (
                 Socket socket = new Socket(HOST, PORT);
                 BufferedReader entrada = new BufferedReader(
@@ -21,6 +31,7 @@ public class Cliente {
                 Scanner scanner = new Scanner(System.in)
                 ){
 
+            salida.println(this.nombre);
             new Thread(() -> {
                 try {
                     String msg;
@@ -49,4 +60,6 @@ public class Cliente {
             System.err.println(ex);
         }
     }
+
+
 }

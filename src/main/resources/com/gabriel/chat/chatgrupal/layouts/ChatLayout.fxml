@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.gabriel.chat.chatgrupal.views.ClienteView"
+            prefHeight="800" prefWidth="1080">
+            <center>
+                <ScrollPane fitToWidth="true">
+                    <VBox fx:id="chatBox" padding="10">
+
+                    </VBox>
+                </ScrollPane>
+            </center>
+            <bottom>
+                <HBox>
+                    <TextField promptText="Introduce un Mensaje " alignment="CENTER_LEFT" prefHeight="50" prefWidth="1000" />
+                    <Button text="Enviar" style="-fx-border-radius: 100px" alignment="CENTER" prefWidth="80" prefHeight="50"/>
+                </HBox>
+
+            </bottom>
+</BorderPane>
