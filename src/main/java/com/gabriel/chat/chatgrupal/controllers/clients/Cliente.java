@@ -2,6 +2,7 @@ package com.gabriel.chat.chatgrupal.controllers.clients;
 
 import com.gabriel.chat.chatgrupal.models.ClienteModel;
 import com.gabriel.chat.chatgrupal.views.ClienteView;
+import javafx.application.Platform;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,37 +17,49 @@ public class Cliente {
     private String nombre;
 
     private ClienteView view = new ClienteView();
+    private PrintWriter salida;
 
-    public Cliente(String nombre) {
+    public Cliente(String nombre, ClienteView view) {
         this.nombre = nombre;
+        this.view = view;
     }
 
     public void iniciar() {
-        try (
-                Socket socket = new Socket(HOST, PORT);
-                BufferedReader entrada = new BufferedReader(
-                        new InputStreamReader(socket.getInputStream()));
-                PrintWriter salida = new PrintWriter(
-                        socket.getOutputStream(), true);
-                Scanner scanner = new Scanner(System.in)
-                ){
+        try{
+            Socket socket = new Socket(HOST, PORT);
+
+            BufferedReader entrada = new BufferedReader(
+                    new InputStreamReader(socket.getInputStream()));
+
+            salida = new PrintWriter(
+                    socket.getOutputStream(), true);
 
             salida.println(this.nombre);
+
             new Thread(() -> {
                 try {
                     String msg;
                     while ((msg = entrada.readLine()) != null) {
-                        System.out.println("\n" + msg);
-                        System.out.print(">> ");
+
+                        String mensajeFinal = msg;
+
+                        Platform.runLater(() -> {
+                            view.sendExternalClientMessage("Servidor", mensajeFinal);
+                        });
                     }
                 } catch (IOException e) {
-                    System.out.println("Conexión cerrada");
+                    Platform.runLater(() ->
+                            view.sendExternalClientMessage(
+                                    "Sistema",
+                                    "Conexión cerrada"
+                            )
+                    );
                 }
             }).start();
 
             System.out.println("Conectado al chat. Escribe mensajes:");
 
-            while (true) {
+            /*while (true) {
                 System.out.print(">> ");
                 String mensaje = scanner.nextLine();
                 salida.println(mensaje);
@@ -54,12 +67,17 @@ public class Cliente {
                 if (mensaje.equalsIgnoreCase("salir")) {
                     break;
                 }
-            }
+            }*/
 
         } catch (IOException ex) {
-            System.err.println(ex);
+            ex.printStackTrace();
         }
     }
 
+    public void enviarMensaje(String mensaje) {
+        if (salida != null){
+            salida.println(mensaje);
+        }
+    }
 
 }

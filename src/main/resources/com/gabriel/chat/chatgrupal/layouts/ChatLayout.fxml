@@ -12,15 +12,15 @@
             prefHeight="800" prefWidth="1080">
             <center>
                 <ScrollPane fitToWidth="true">
-                    <VBox fx:id="chatBox" padding="10">
+                    <VBox fx:id="chatBox">
 
                     </VBox>
                 </ScrollPane>
             </center>
             <bottom>
                 <HBox>
-                    <TextField promptText="Introduce un Mensaje " alignment="CENTER_LEFT" prefHeight="50" prefWidth="1000" />
-                    <Button text="Enviar" style="-fx-border-radius: 100px" alignment="CENTER" prefWidth="80" prefHeight="50"/>
+                    <TextField fx:id="inputMessage" promptText="Introduce un Mensaje " alignment="CENTER_LEFT" prefHeight="50" prefWidth="1000" />
+                    <Button text="Enviar" style="-fx-border-radius: 100px" alignment="CENTER" prefWidth="80" prefHeight="50" onAction="#onSendMessage"/>
                 </HBox>
 
             </bottom>
