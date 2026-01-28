@@ -1,5 +1,9 @@
 package com.gabriel.chat.chatgrupal.controllers.server;
 
+import com.gabriel.chat.chatgrupal.controllers.client.Cliente;
+import com.gabriel.chat.chatgrupal.models.ChatModel;
+import com.gabriel.chat.chatgrupal.models.ClienteModel;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +14,7 @@ public class ManejadorCliente implements Runnable {
     private Socket socket;
     private int idCliente;
     private String nombreCliente;
-
+    private ChatModel chat;
     private PrintWriter salida;
     private BufferedReader entrada;
 
@@ -35,6 +39,10 @@ public class ManejadorCliente implements Runnable {
                     break;
                 }
 
+                if (message.equals(ClienteModel.class)) {
+
+                }
+
                 manager("Cliente #" + nombreCliente + ": " + message);
             }
 
@@ -56,5 +64,17 @@ public class ManejadorCliente implements Runnable {
             cli.salida.println(mensaje);
 
         }
+    }
+
+
+    public String getChat() {
+        return chat;
+    }
+
+    public void setChat(String chat) {
+        this.chat = chat;
+    }
+    public String getNombreCliente() {
+        return nombreCliente;
     }
 }

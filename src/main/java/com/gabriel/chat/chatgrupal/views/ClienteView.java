@@ -1,8 +1,7 @@
 package com.gabriel.chat.chatgrupal.views;
 
-import com.gabriel.chat.chatgrupal.controllers.clients.Cliente;
+import com.gabriel.chat.chatgrupal.controllers.client.Cliente;
 import com.gabriel.chat.chatgrupal.models.ClienteModel;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -11,8 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
 
 
 public class ClienteView {
